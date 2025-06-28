@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      dotnet: 8.0
+  pre_build:
+    commands:
+      - echo Restore started on the 'date'
+      - dotnet restore demoapp.csproj     
+  build:
+    commands:
+      - dotnet build demoapp.csproj
+      - dotnet publish -c release -o ./build_output  demoapp.csproj      
+      
+artifacts:
+  files:
+    - ./**/*
+  base-directory: './build_output'
+    
